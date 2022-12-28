@@ -89,6 +89,6 @@ while True:
         tail = tail[:tail_length]
         my_position[POS_X] += 1
         my_position[POS_X] %= MAP_WIDTH
-    else:
+    elif direction == "q":
         print("Thanks for playing!")
         break
