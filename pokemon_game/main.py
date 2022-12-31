@@ -1,4 +1,5 @@
 import os
+import random
 from time import sleep
 from readchar import readchar
 
@@ -10,9 +11,9 @@ world_map = """\
 #       #    #           #
 #       #    #           #
 ###   ###    #######     #
-
-
-
+                          
+                          
+                          
 #       #    #           #
 #       #    #           #
 #       #    #           #
@@ -26,6 +27,7 @@ Y_COORDINATE = 1
 
 list_of_world_map = [list(row) for row in world_map.split("\n")]
 player_position = [10, 0]
+
 trainer_found = False
 trainers = ['A', 'R', 'E', 'G']
 trainer_name = ''
@@ -34,6 +36,7 @@ MAP_WIDTH = len(list_of_world_map[0])
 MAP_HEIGHT = len(list_of_world_map)
 
 while True:
+    player_pokemon_health = 60
     os.system("clear")
 
     if trainer_found:
@@ -45,11 +48,11 @@ while True:
         if want_fight:
             if trainer_name == 'Arven':
                 print("I have one Pokemon: Bulbasaur.")
-
                 print("You start the battle with your Pokemon: Pikachu.")
 
-                player_pokemon_health = 50
-                trainer_pokemon_health = 70
+                trainer_pokemon_health = 45
+                pokemon_attacks = [
+                    'tackle = 10', 'vine whip = 15', 'razor leaf = 20', 'solar beam = 25']
 
                 while player_pokemon_health > 0 and trainer_pokemon_health > 0:
                     os.system('clear')
@@ -57,20 +60,44 @@ while True:
                     print(f'Bulbasur {"#" * trainer_pokemon_health}')
                     print(f'Pikachu {"#" * player_pokemon_health}')
                     print("What attack do you want to use?")
-                    attack = input(
-                        " 1. Thunderbolt\n 2. Thunder\n 3. Volt Tackle\n 4. Thunder Shock\n")
+                    player_attack = input(
+                        " 1. Thunderbolt = 20 \n 2. Thunder = 10\n 3. Volt Tackle = 12\n 4. Thunder Shock = 5\n")
 
-                    if attack == '1':
+                    if player_attack == '1':
+                        trainer_pokemon_health -= 20
+                    elif player_attack == '2':
                         trainer_pokemon_health -= 10
-                    elif attack == '2':
+                    elif player_attack == '3':
+                        trainer_pokemon_health -= 12
+                    elif player_attack == '4':
                         trainer_pokemon_health -= 5
-                    elif attack == '3':
-                        trainer_pokemon_health -= 8
-                    elif attack == '4':
-                        trainer_pokemon_health -= 3
                     else:
                         print('Opción inválida')
                         sleep(3)
+
+                    pokemon_attack = pokemon_attacks[random.randint(
+                        0, len(pokemon_attacks) - 1)]
+
+                    if pokemon_attack == 'tackle = 10':
+                        print('Bulbasur used tackle')
+                        player_pokemon_health -= 10
+                        sleep(1)
+                    elif pokemon_attack == 'vine whip = 15':
+                        print('Bulbasur used vine whip')
+                        player_pokemon_health -= 15
+                        sleep(1)
+                    elif pokemon_attack == 'razor leaf = 20':
+                        print('Bulbasur used razor leaf')
+                        player_pokemon_health -= 20
+                        sleep(1)
+                    elif pokemon_attack == 'solar beam = 25':
+                        print('Bulbasur used solar beam')
+                        player_pokemon_health -= 25
+                        sleep(1)
+                    else:
+                        print('Opción inválida')
+                        sleep(1)
+
                 else:
                     win = trainer_pokemon_health <= 0
 
@@ -79,8 +106,10 @@ while True:
                                           ][trainer_position[X_COORDINATE]] = ' '
 
                         trainers.remove('A')
-
-                        print('Ganaste')
+                        os.system('clear')
+                        print('***********')
+                        print('* Ganaste *')
+                        print('***********')
                         sleep(3)
                     else:
                         print('Perdiste')
@@ -88,26 +117,211 @@ while True:
 
                 trainer_found = False
             elif trainer_name == 'Riley':
-                print("I have three Pokemon: Pidgey, Rattata, and Spearow.")
-                list_of_world_map[trainer_position[Y_COORDINATE]
-                                  ][trainer_position[X_COORDINATE]] = ' '
-                trainers.remove('R')
+                print("I have one Pokemon: Charmander.")
 
-                input()
+                print("You start the battle with your Pokemon: Pikachu.")
+
+                player_pokemon_health = 50
+                trainer_pokemon_health = 60
+                pokemon_attacks = ['scratch = 5', 'ember = 8',
+                                   'flamethrower = 12', 'fire blast = 17']
+
+                while player_pokemon_health > 0 and trainer_pokemon_health > 0:
+                    os.system('clear')
+                    print("HEALTH")
+                    print(f'Charmander {"#" * trainer_pokemon_health}')
+                    print(f'Pikachu {"#" * player_pokemon_health}')
+                    print("What attack do you want to use?")
+                    player_attack = input(
+                        " 1. Thunderbolt = 20 \n 2. Thunder = 10\n 3. Volt Tackle = 12\n 4. Thunder Shock = 5\n")
+
+                    if player_attack == '1':
+                        trainer_pokemon_health -= 20
+                    elif player_attack == '2':
+                        trainer_pokemon_health -= 10
+                    elif player_attack == '3':
+                        trainer_pokemon_health -= 12
+                    elif player_attack == '4':
+                        trainer_pokemon_health -= 5
+                    else:
+                        print('Opción inválida')
+                        sleep(3)
+
+                    pokemon_attack = pokemon_attacks[random.randint(
+                        0, len(pokemon_attacks) - 1)]
+
+                    if pokemon_attack == 'scratch = 5':
+                        print('Charmander used scratch')
+                        player_pokemon_health -= 5
+                        sleep(1)
+                    elif pokemon_attack == 'ember = 8':
+                        print('Charmander used ember')
+                        player_pokemon_health -= 8
+                        sleep(1)
+                    elif pokemon_attack == 'flamethrower = 12':
+                        print('Charmander used flamethrower')
+                        player_pokemon_health -= 12
+                        sleep(1)
+                    elif pokemon_attack == 'fire blast = 17':
+                        print('Charmander used fire blast')
+                        player_pokemon_health -= 17
+                        sleep(1)
+                    else:
+                        print('Opción inválida')
+                        sleep(1)
+
+                else:
+                    win = trainer_pokemon_health <= 0
+
+                    if win:
+                        list_of_world_map[trainer_position[Y_COORDINATE]
+                                          ][trainer_position[X_COORDINATE]] = ' '
+
+                        trainers.remove('R')
+                        os.system('clear')
+                        print('***********')
+                        print('* Ganaste *')
+                        print('***********')
+                        sleep(3)
+                    else:
+                        print('Perdiste')
+                        sleep(3)
+
                 trainer_found = False
             elif trainer_name == 'Ethan':
-                print("I have three Pokemon: Caterpie, Weedle, and Pidgey.")
-                list_of_world_map[trainer_position[Y_COORDINATE]
-                                  ][trainer_position[X_COORDINATE]] = ' '
-                trainers.remove('E')
-                input()
+                print("I have one Pokemon: Squirtle.")
+
+                print("You start the battle with your Pokemon: Pikachu.")
+
+                player_pokemon_health = 50
+                trainer_pokemon_health = 60
+                pokemon_attacks = ['tackle = 4', 'bubble = 20',
+                                   'water gun = 9', 'hydro pump = 12']
+
+                while player_pokemon_health > 0 and trainer_pokemon_health > 0:
+                    os.system('clear')
+                    print("HEALTH")
+                    print(f'Squirtle {"#" * trainer_pokemon_health}')
+                    print(f'Pikachu {"#" * player_pokemon_health}')
+                    print("What attack do you want to use?")
+                    player_attack = input(
+                        " 1. Thunderbolt = 20 \n 2. Thunder = 10\n 3. Volt Tackle = 12\n 4. Thunder Shock = 5\n")
+
+                    if player_attack == '1':
+                        trainer_pokemon_health -= 20
+                    elif player_attack == '2':
+                        trainer_pokemon_health -= 10
+                    elif player_attack == '3':
+                        trainer_pokemon_health -= 12
+                    elif player_attack == '4':
+                        trainer_pokemon_health -= 5
+                    else:
+                        print('Opción inválida')
+                        sleep(3)
+
+                    pokemon_attack = pokemon_attacks[random.randint(
+                        0, len(pokemon_attacks) - 1)]
+
+                    if pokemon_attack == 'tackle = 4':
+                        print('Squirtle used tackle')
+                        player_pokemon_health -= 4
+                        sleep(1)
+                    elif pokemon_attack == 'bubble = 20':
+                        print('Squirtle used bubble')
+                        player_pokemon_health -= 20
+                        sleep(1)
+                    elif pokemon_attack == 'water gun = 9':
+                        print('Squirtle used water gun')
+                        player_pokemon_health -= 9
+                        sleep(1)
+                    elif pokemon_attack == 'hydro pump = 12':
+                        print('Squirtle used hydro pump')
+                        player_pokemon_health -= 12
+                        sleep(1)
+                    else:
+                        print('Opción inválida')
+                        sleep(1)
+
+                else:
+                    win = trainer_pokemon_health <= 0
+
+                    if win:
+                        list_of_world_map[trainer_position[Y_COORDINATE]
+                                          ][trainer_position[X_COORDINATE]] = ' '
+
+                        trainers.remove('E')
+                        os.system('clear')
+                        print('***********')
+                        print('* Ganaste *')
+                        print('***********')
+                        sleep(3)
+                    else:
+                        print('Perdiste')
+                        sleep(3)
+
                 trainer_found = False
             elif trainer_name == 'Gavin':
-                print("I have three Pokemon: Arcanine, Charizard, and Blastoise.")
-                list_of_world_map[trainer_position[Y_COORDINATE]
-                                  ][trainer_position[X_COORDINATE]] = ' '
-                trainers.remove('G')
-                input()
+                print("I have one Pokemon: Caterpie.")
+
+                print("You start the battle with your Pokemon: Pikachu.")
+
+                player_pokemon_health = 50
+                trainer_pokemon_health = 60
+                pokemon_attacks = ['tackle = 4', 'string shot = 8',]
+
+                while player_pokemon_health > 0 and trainer_pokemon_health > 0:
+                    os.system('clear')
+                    print("HEALTH")
+                    print(f'Squirtle {"#" * trainer_pokemon_health}')
+                    print(f'Pikachu {"#" * player_pokemon_health}')
+                    print("What attack do you want to use?")
+                    player_attack = input(
+                        " 1. Thunderbolt = 20 \n 2. Thunder = 10\n 3. Volt Tackle = 12\n 4. Thunder Shock = 5\n")
+
+                    if player_attack == '1':
+                        trainer_pokemon_health -= 20
+                    elif player_attack == '2':
+                        trainer_pokemon_health -= 10
+                    elif player_attack == '3':
+                        trainer_pokemon_health -= 12
+                    elif player_attack == '4':
+                        trainer_pokemon_health -= 5
+                    else:
+                        print('Opción inválida')
+                        sleep(3)
+
+                    pokemon_attack = pokemon_attacks[random.randint(
+                        0, len(pokemon_attacks) - 1)]
+
+                    if pokemon_attack == 'tackle = 4':
+                        print('Caterpie used tackle')
+                        player_pokemon_health -= 4
+                        sleep(1)
+                    elif pokemon_attack == 'string shot = 8':
+                        print('Caterpie used string shot')
+                        player_pokemon_health -= 8
+                        sleep(1)
+                    else:
+                        print('Opción inválida')
+                        sleep(1)
+
+                else:
+                    win = trainer_pokemon_health <= 0
+
+                    if win:
+                        list_of_world_map[trainer_position[Y_COORDINATE]
+                                          ][trainer_position[X_COORDINATE]] = ' '
+
+                        trainers.remove('G')
+                        os.system('clear')
+                        print('***********')
+                        print('* Ganaste *')
+                        print('***********')
+                        sleep(3)
+                    else:
+                        print('Perdiste')
+                        sleep(3)
+
                 trainer_found = False
         else:
             trainer_found = False
